@@ -263,8 +263,14 @@ namespace Advance_Software_first_module
                 LivePoint(true);
             }
         }
-       
 
+        private Boolean checkNumber(string no, ref int val)
+        {
+            Boolean isNumber = false;
+            if (int.TryParse(no.Trim(), out val))
+                isNumber = true;
+            return isNumber;
+        }
     }
 }
 
