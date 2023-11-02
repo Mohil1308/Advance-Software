@@ -155,7 +155,7 @@ namespace Advance_Software_first_module
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
                                 {
                                     if (runFlg)
                                     {
@@ -170,7 +170,7 @@ namespace Advance_Software_first_module
                                 y = y + 1;
                             }
                         }
-                        else if (oneCommand[j].ToString().Trim().Equals("rect"))
+                        else if (oneCommand[y].ToString().Trim().Equals("rect"))
                         {
                             if (oneCommand.Count() != 3)
                             {
@@ -256,12 +256,23 @@ namespace Advance_Software_first_module
         }
             if (errMsg.Trim() != string.Empty)
             {
+
                 PrintMessage(errMsg);
             }
             if (DrawShape.isFill)
             {
                 LivePoint(true);
             }
+        }
+
+        private void PrintMessage(string errMsg)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LivePoint(bool v)
+        {
+            throw new NotImplementedException();
         }
 
         private Boolean checkNumber(string no, ref int val)
