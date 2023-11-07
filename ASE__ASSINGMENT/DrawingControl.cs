@@ -1,270 +1,281 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advance_Software_first_module
+namespace ASE__ASSINGMENT
 {
-    public class DrawControl : Canvass
+    // Inherit from DrawingPaper, indicating that this class extends its functionality.
+    public class DrawingControl : DrawingPaper
     {
+        // Method to execute a series of drawing commands.
         public void runCommands(String strtxt)
         {
+            // Initialize variables for error messages, command, and a flag.
             string errMsg = string.Empty;
-            string strCommand = string.Empty; 
+            string strCommand = string.Empty;
             Boolean runFlg = true;
-            int cmdA = 0, cmdB = 0, cmdC = 0;
+            int cmdX = 0, cmdY = 0, cmdz = 0;
+            // Split the input string into individual commands based on the semicolon.
             string[] arrCommand = strtxt.ToLower().Split(new string[] { ";" }, StringSplitOptions.None);
             string[] oneCommand;
-            for(int x = 0; x < arrCommand.Count(); x++)
-            {
-                if (arrCommand[x].Trim().ToString() != string.Empty)
-                {
-                    oneCommand = arrCommand[x].Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    for (int y = 0; y < oneCommand.Count(); y++)
-                    {
-                        if (oneCommand[y].ToString().Trim().Equals("moveto"))
-                        {
-                            if (oneCommand.Count() != 3)
-                            {
-                                errMsg = errMsg + "Command no. " + (x + 1).ToString() + " is invalid!\n";
-                                runFlg = false;
-                                break;
-                            }
-                            else
-                            {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
-                                {
-                                    if (checkNumber(oneCommand[y + 2].Trim(), ref cmdB))
-                                    {
-                                        if (runFlg)
-                                        {
-                                            MoPoint(cmdA, cmdB);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
-                                        runFlg = false;
-                                    }
-                                }
-                                else
-                                {
-                                    errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
-                                    runFlg = false;
-                                }
-                                y = y + 2;
-                            }
 
-                        }
-                        else if (oneCommand[y].ToString().Trim().Equals("drawto"))
+            // Iterate through each command.
+            for (int i = 0; i < arrCommand.Count(); i++)
+            {
+                // Check if the command is not empty.
+                if (arrCommand[i].Trim().ToString() != string.Empty)
+                {
+                    oneCommand = arrCommand[i].Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    for (int j = 0; j < oneCommand.Count(); j++)
+                    {
+                        if (oneCommand[j].ToString().Trim().Equals("goto"))
                         {
                             if (oneCommand.Count() != 3)
                             {
-                                errMsg = errMsg + "Command no " + x.ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Command no. " + (i + 1).ToString() + " is invalid!\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
                                 {
-                                    if (checkNumber(oneCommand[y + 2].Trim(), ref cmdB))
+                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
                                     {
                                         if (runFlg)
                                         {
-                                            DrLine(cmdA, cmdB);
+                                            MovePoint(cmdX, cmdY);
                                         }
                                     }
                                     else
                                     {
-                                        errMsg = errMsg + " Invalid number at command no " + x.ToString() + "!\n";
+                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                         runFlg = false;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + x.ToString() + "!\n";
+                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                     runFlg = false;
                                 }
-                                y = y + 2;
+                                j = j + 2;
                             }
                         }
-                        else if (oneCommand[y].ToString().Trim().Equals("circle"))
+                        else if (oneCommand[j].ToString().Trim().Equals("drawline"))
+                        {
+                            // Check if "drawline" command has the correct number of parameters.
+                            if (oneCommand.Count() != 3)
+                            {
+                                errMsg = errMsg + "Command no " + i.ToString() + " is invalid!\n";
+                                runFlg = false;
+                                break;
+                            }
+                            else
+                            {
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                {
+                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
+                                    {
+                                        if (runFlg)
+                                        {
+                                            DrawLine(cmdX, cmdY);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errMsg = errMsg + " Invalid number at command no " + i.ToString() + "!\n";
+                                        runFlg = false;
+                                    }
+                                }
+                                else
+                                {
+                                    errMsg = errMsg + " Invalid number at command no " + i.ToString() + "!\n";
+                                    runFlg = false;
+                                }
+                                j = j + 2;
+                            }
+                        }
+                        else if (oneCommand[j].ToString().Trim().Equals("designcircle"))
                         {
                             if (oneCommand.Count() != 2)
                             {
-                                errMsg = errMsg + "invalid number of parameters for circle " + (x + 1).ToString() + "\n";
+                                errMsg = errMsg + "invalid number of parameters for circle " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
                                 {
                                     if (runFlg)
                                     {
-                                        DrCircle(cmdA);
+                                        DrawCircle(cmdX);
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Non numeric parameter " + (x + 1).ToString() + "\n";
+                                    errMsg = errMsg + " Non numeric parameter " + (i + 1).ToString() + "\n";
                                     runFlg = false;
                                 }
-                                y = y + 1;
+                                j = j + 1;
                             }
                         }
-                        else if (oneCommand[y].ToString().Trim().Equals("pen"))
+
+                        else if (oneCommand[j].ToString().Trim().Equals("pen"))
                         {
                             if (oneCommand.Count() != 2)
                             {
-                                errMsg = errMsg + "invalid number of parameters for circle " + (x + 1).ToString() + "\n";
+                                errMsg = errMsg + "invalid number of parameters for circle " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                string val = oneCommand[y + 1].Trim();
+                                string val = oneCommand[j + 1].Trim();
                                 if (val.Equals("red"))
                                 {
-                                    DrawShape.FillColor = new SolidBrush(Color.Red);
-                                    DrawShape.penColor = Color.Red;
+                                    DrawingShapes.drawColor = new SolidBrush(Color.Red);
+                                    DrawingShapes.pColor = Color.Red;
                                 }
                                 else if (val.Equals("green"))
                                 {
-                                    DrawShape.FillColor = new SolidBrush(Color.Green);
-                                    DrawShape.penColor = Color.Green;
+                                    DrawingShapes.drawColor = new SolidBrush(Color.Green);
+                                    DrawingShapes.pColor = Color.Green;
                                 }
                                 else if (val.Equals("blue"))
                                 {
-                                    DrawShape.FillColor = new SolidBrush(Color.Blue);
-                                    DrawShape.penColor = Color.Blue;
+                                    DrawingShapes.drawColor = new SolidBrush(Color.Blue);
+                                    DrawingShapes.pColor = Color.Blue;
                                 }
-                                y = y + 1;
+                                j = j + 1;
                             }
                         }
-                        else if (oneCommand[y].ToString().Trim().Equals("square"))
+
+
+                        else if (oneCommand[j].ToString().Trim().Equals("designsquare"))
                         {
                             if (oneCommand.Count() != 2)
                             {
-                                errMsg = errMsg + "Command no " + (x + 1).ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Command no " + (i + 1).ToString() + " is invalid!\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
                                 {
                                     if (runFlg)
                                     {
-                                        DrSquare(cmdA);
+                                        DrawSquare(cmdX);
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                     runFlg = false;
                                 }
-                                y = y + 1;
+                                j = j + 1;
                             }
                         }
-                        else if (oneCommand[y].ToString().Trim().Equals("rect"))
+                        else if (oneCommand[j].ToString().Trim().Equals("designrect"))
                         {
                             if (oneCommand.Count() != 3)
                             {
-                                errMsg = errMsg + "Invalid no of argument at command " + (x + 1).ToString() + "!\n";
+                                errMsg = errMsg + "Invalid no of argument at command " + (i + 1).ToString() + "!\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
                                 {
-                                    if (checkNumber(oneCommand[y + 2].Trim(), ref cmdB))
+                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
                                     {
                                         if (runFlg)
                                         {
-                                            DrRect(cmdA, cmdB);
+                                            DrawRect(cmdX, cmdY);
                                         }
                                     }
                                     else
                                     {
-                                        errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                         runFlg = false;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                     runFlg = false;
                                 }
-                                y = y + 2;
+                                j = j + 2;
                             }
                         }
-                        else if (oneCommand[y].ToString().Trim().Equals("triangle"))
+                        else if (oneCommand[j].ToString().Trim().Equals("designtriangle"))
                         {
                             if (oneCommand.Count() != 4)
                             {
-                                errMsg = errMsg + "Command no " + (x + 1).ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Command no " + (i + 1).ToString() + " is invalid!\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[y + 1].Trim(), ref cmdA))
+                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
                                 {
-                                    if (checkNumber(oneCommand[y + 2].Trim(), ref cmdB))
+                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
                                     {
-                                        if (checkNumber(oneCommand[y + 3].Trim(), ref cmdC))
+                                        if (checkNumber(oneCommand[j + 3].Trim(), ref cmdz))
                                         {
                                             if (runFlg)
                                             {
-                                                DrTriangle(cmdA, cmdB, cmdC);
+                                                DrawTriangle(cmdX, cmdY, cmdz);
                                             }
                                         }
                                         else
                                         {
-                                            errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                            errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                             runFlg = false;
                                         }
                                     }
                                     else
                                     {
-                                        errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                         runFlg = false;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (x + 1).ToString() + "!\n";
+                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
                                     runFlg = false;
                                 }
-                                y = y + 3;
+                                j = j + 3;
                             }
                         }
                         else
                         {
-                            errMsg = errMsg + "Unknown Command at line " + (x + 1).ToString();
+                            errMsg = errMsg + "Unknown Command at line " + (i + 1).ToString();
                             runFlg = false;
                             break;
                         }
-                    }
-            }
 
-        }
+                    }
+                }
+            }
+            // Display error messages if any.
             if (errMsg.Trim() != string.Empty)
             {
                 PrintMessage(errMsg);
             }
-            if (DrawShape.isFill)
+
+            // Call CurrPoint method if DrawingShapes.Fill is true.
+            if (DrawingShapes.Fill)
             {
-                LivePointer(true);
+                CurrPoint(true);
             }
         }
-
-       
 
         private Boolean checkNumber(string no, ref int val)
         {
@@ -273,8 +284,5 @@ namespace Advance_Software_first_module
                 isNumber = true;
             return isNumber;
         }
-
-       
     }
 }
-

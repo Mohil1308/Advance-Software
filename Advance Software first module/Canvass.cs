@@ -22,7 +22,7 @@ namespace Advance_Software_first_module
         public Canvass()
         {
             this.gra = Graphics.FromImage(DrawShape.NPicture);
-            pe = new Pen(Color.Gray, 1);
+            pe = new Pen(Color.Black, 1);
             a = DrawShape.a;
             b = DrawShape.b;
         }
@@ -37,7 +37,7 @@ namespace Advance_Software_first_module
                 }
                 else
                     this.gra.DrawLine(pe, a, b, apos, bpos);
-                pe = new Pen(Color.Gray, 1);
+                pe = new Pen(Color.Black, 1);
                 DrawShape.isUnitValid = true;
             }
             catch (Exception ex)
@@ -131,7 +131,7 @@ namespace Advance_Software_first_module
         }
         public void LivePointer(Boolean flg)
         {
-            pe = new Pen(Color.White, 2);
+            pe = new Pen(Color.Red, 2);
             if (flg)
             {
                 LivePos = GetRect(DrawShape.a, DrawShape.b, 2, 2);
@@ -144,7 +144,7 @@ namespace Advance_Software_first_module
                 LivePos = GetRect(a, b, 2, 2);
                 this.gra.DrawRectangle(pe, LivePos);
             }
-            pe = new Pen(Color.Gray, 1);
+            pe = new Pen(Color.Black, 1);
         }
         public void MoPoint(int apos, int bpos)
         {
@@ -152,12 +152,12 @@ namespace Advance_Software_first_module
             {
                 pe = new Pen(SystemColors.ActiveBorder, 2);
                 this.gra.DrawRectangle(pe, LivePos);
-                pe = new Pen(Color.White, 2);
+                pe = new Pen(Color.Red, 2);
                 LivePos = GetRect(apos, bpos, 2, 2);
                 this.gra.DrawRectangle(pe, LivePos);
                 a = DrawShape.a = apos;
                 b = DrawShape.b = bpos;
-                pe = new Pen(Color.Gray, 1);
+                pe = new Pen(Color.Black, 1);
                 DrawShape.isUnitValid = true;
 
             }
@@ -175,11 +175,11 @@ namespace Advance_Software_first_module
             return new Rectangle(xa, xb, xwid, xhei);
         }
 
-        private void PrintMessage(String ErrMsg)
+        public void PrintMessage(String ErrMsg)
         {
             using (Font myFont = new Font("Calibri", 8))
             {
-                gra.DrawString(ErrMsg, myFont, Brushes.Gray, new Point(5, 5));
+                gra.DrawString(ErrMsg, myFont, Brushes.Black, new Point(5, 5));
             }
         }
     }

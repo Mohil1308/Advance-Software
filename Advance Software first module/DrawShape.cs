@@ -10,7 +10,7 @@ namespace Advance_Software_first_module
     public class DrawShape
     {
         private static int _a, _b;
-        static private Bitmap _NPicture = new Bitmap(680, 450);
+        static private Bitmap _NPicture = new Bitmap(640, 480);
         static SolidBrush _FillColor;
         static Boolean _isFill;
         static Boolean _isUnitValid;

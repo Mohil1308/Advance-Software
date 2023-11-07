@@ -1,0 +1,10 @@
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\bin\Debug\ASE__ASSINGMENT.exe.config
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\bin\Debug\ASE__ASSINGMENT.exe
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\bin\Debug\ASE__ASSINGMENT.pdb
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.csproj.AssemblyReference.cache
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.Form1.resources
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.Properties.Resources.resources
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.csproj.GenerateResource.cache
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.csproj.CoreCompileInputs.cache
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.exe
+C:\Users\sweet\source\repos\Advance Software\ASE__ASSINGMENT\obj\Debug\ASE__ASSINGMENT.pdb
