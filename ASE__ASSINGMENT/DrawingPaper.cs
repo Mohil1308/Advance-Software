@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ASE__ASSINGMENT
 {
+    /// <summary>
+    /// Represents a drawing paper with methods to draw various shapes and manipulate the drawing.
+    /// </summary>
     public class DrawingPaper
     {
         //Graphics variable for graphic funcation
@@ -30,6 +33,7 @@ namespace ASE__ASSINGMENT
             x = DrawingShapes.x;
             y = DrawingShapes.y;
         }
+
 
         public void DrawLine(int xpos, int ypos)
         {
@@ -78,6 +82,11 @@ namespace ASE__ASSINGMENT
             }
         }
 
+        /// <summary>
+        /// Draws a rectangle at the current position with the specified width and height.
+        /// </summary>
+        /// <param name="width">The width of the rectangle.</param>
+        /// <param name="height">The height of the rectangle.</param>
         public void DrawRect(int width, int height)
         {
             try
@@ -137,6 +146,12 @@ namespace ASE__ASSINGMENT
             }
         }
 
+        /// <summary>
+        /// Draws a triangle at the current position with the specified side lengths.
+        /// </summary>
+        /// <param name="xpos">The length of the first side.</param>
+        /// <param name="ypos">The length of the second side.</param>
+        /// <param name="zpos">The length of the third side.</param>
         public void DrawTriangle(int xpos, int ypos, int zpos)
         {
             try

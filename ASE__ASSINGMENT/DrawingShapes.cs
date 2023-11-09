@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ASE__ASSINGMENT
 {
+    /// <summary>
+    /// This class represents a container for various drawing-related properties and settings.
+    /// </summary>
     // This class represents a container for various drawing-related properties and settings.
     public class DrawingShapes
     {
@@ -18,6 +21,9 @@ namespace ASE__ASSINGMENT
         static Boolean _isUnitValid;
         static Color _pColor;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to fill shapes during drawing.
+        /// </summary>
         // Public property for Fill setting.
         public static Boolean Fill
         {
@@ -28,6 +34,9 @@ namespace ASE__ASSINGMENT
             set { _Fill = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the brush used for drawing.
+        /// </summary>
         // Public property for the brush used for drawing.
         public static SolidBrush drawColor
         {
@@ -38,6 +47,9 @@ namespace ASE__ASSINGMENT
             set { _drawColor = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the bitmap that holds the drawing.
+        /// </summary>
         // Public property for the bitmap that holds the drawing.
         public static Bitmap nPicture
         {
@@ -48,6 +60,9 @@ namespace ASE__ASSINGMENT
             set { _nPicture = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the X-coordinate of the drawing.
+        /// </summary>
         // Public properties for X and Y coordinates.
         public static int x
         {
@@ -56,6 +71,9 @@ namespace ASE__ASSINGMENT
             set { _x = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the Y-coordinate of the drawing.
+        /// </summary>
         public static int y
         {
             get
@@ -63,6 +81,9 @@ namespace ASE__ASSINGMENT
             set { _y = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the current pen color.
+        /// </summary>
         // Public property for the current pen color.
         public static Color pColor
         {
@@ -70,6 +91,9 @@ namespace ASE__ASSINGMENT
             set { _pColor = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether a unit is valid.
+        /// </summary>
         // Public property to determine if a unit is valid.
         public static Boolean isUnitValid
         {

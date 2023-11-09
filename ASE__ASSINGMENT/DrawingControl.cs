@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace ASE__ASSINGMENT
 {
+    /// <summary>
+    /// This class extends the functionality of the DrawingPaper class and provides methods
+    /// to execute a series of drawing commands based on input text.
+    /// </summary>
     // Inherit from DrawingPaper, indicating that this class extends its functionality.
     public class DrawingControl : DrawingPaper
     {
