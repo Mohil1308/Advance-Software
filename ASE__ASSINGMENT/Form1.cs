@@ -90,5 +90,19 @@ namespace ASE__ASSINGMENT
             d.CurrPoint(false);
             Refresh();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "JPEG|*.jpeg";
+            save.Title = "Assingmemnt";
+            save.ShowDialog();
+
+            if(save.FileName != "" && DrawingShapes.nPicture != null)
+            {
+                DrawingShapes.nPicture.Save(save.FileName);
+            }
+
+        }
     }
 }
