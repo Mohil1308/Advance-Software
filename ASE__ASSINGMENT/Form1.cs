@@ -94,7 +94,7 @@ namespace ASE__ASSINGMENT
         private void button4_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
-            save.Filter = "JPEG|*.jpeg";
+            save.Filter = "TEXT|*.text";
             save.Title = "Assingmemnt";
             save.ShowDialog();
 

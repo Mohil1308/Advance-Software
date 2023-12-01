@@ -73,7 +73,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(48, 630);
+            this.textBox1.Location = new System.Drawing.Point(48, 632);
             this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(418, 31);
@@ -110,7 +110,6 @@
             this.button4.Text = "Save";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-
             // 
             // Form1
             // 
