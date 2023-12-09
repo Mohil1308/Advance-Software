@@ -1,0 +1,4 @@
+C:\Users\sweet\source\repos\Advance Software\Module 2\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\sweet\source\repos\Advance Software\Module 2\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\sweet\source\repos\Advance Software\Module 2\obj\Debug\net8.0-windows\Module 2_MarkupCompile.cache
+C:\Users\sweet\source\repos\Advance Software\Module 2\obj\Debug\net8.0-windows\Module 2_MarkupCompile.lref
