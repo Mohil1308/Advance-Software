@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Button Content="Run" Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" Name="btnRun" VerticalAlignment="Top" Width="75" Click="btnRun_Click" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="95,10,0,0" Name="txtCommand" VerticalAlignment="Top" Width="392" Background="#FFCCCCCC" PreviewKeyDown="txtCommand_PreviewKeyDown" />
+        <Button Content="Execute" Height="23" HorizontalAlignment="Left" Margin="502,10,0,0" Name="btnExecute" VerticalAlignment="Top" Width="75" Click="btnExecute_Click" />
+        <Label Content="Command Terminal" Height="30" HorizontalAlignment="Left" Margin="10,53,0,0" Name="lblConsoleTerminal" VerticalAlignment="Top" Width="150" />
+        <Label Content="Program Window" Height="30" HorizontalAlignment="Left" Margin="10,88,0,0" Name="lblProgramWindow" VerticalAlignment="Top" Width="150" />
+        <TextBox Height="301" HorizontalAlignment="Left" Margin="10,123,0,0" Name="txtProgram" VerticalAlignment="Top" Width="474" AcceptsReturn="True" Background="#FFC8C8C8" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <Label Content="Drawing Canvas" Height="30" HorizontalAlignment="Left" Margin="502,88,0,0" Name="lblDrawingCanvas" VerticalAlignment="Top" Width="150" />
+        <Canvas Height="300" HorizontalAlignment="Left" Margin="502,123,0,0" Name="myCanvas" VerticalAlignment="Top" Width="284" Background="#FFD5D5D5"></Canvas>
+        <Rectangle Height="375" HorizontalAlignment="Left" Margin="10,2,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="400" />
+        <Rectangle Height="375" HorizontalAlignment="Left" Margin="502,2,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="284" />
+        <Rectangle Height="56" HorizontalAlignment="Left" Margin="10,383,0,0" Name="rectangle2" Stroke="Black" VerticalAlignment="Top" Width="674" Grid.RowSpan="2" />
+        <Rectangle Height="56" HorizontalAlignment="Left" Margin="502,383,0,0" Name="rectangle5" Stroke="Black" VerticalAlignment="Top" Width="284" Grid.RowSpan="2" />
+        <Button Content="Load" Height="23" HorizontalAlignment="Left" Margin="10,407,0,0" Name="btnLoad" VerticalAlignment="Top" Width="75" Click="btnLoad_Click" />
+        <Button Content="Save" Height="23" HorizontalAlignment="Left" Margin="95,407,0,0" Name="btnSave" VerticalAlignment="Top" Width="75" Click="btnSave_Click" RenderTransformOrigin="0.008,3.366" />
+        <Label Content="Console" Height="28" HorizontalAlignment="Left" Margin="502,53,0,0" Name="lblOutput" VerticalAlignment="Top" Width="93" />
+        <TextBox Height="85" HorizontalAlignment="Left" Margin="502,83,0,0" Name="txtOutput" VerticalAlignment="Top" Width="284" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <Label Content="Canvas Elements" Height="28" HorizontalAlignment="Left" Margin="10,103,0,0" Name="lblCanvasElements" VerticalAlignment="Top" Width="109" />
+        <ComboBox Height="23" HorizontalAlignment="Left" Margin="125,103,0,0" Name="cboCanvasElements" VerticalAlignment="Top" Width="120" SelectionChanged="cboCanvasElements_SelectionChanged" />
+        <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="256,103,0,0" Name="btnAdd" VerticalAlignment="Top" Width="75" Click="btnAdd_Click" />
+        <Label Content="Color" Height="28" HorizontalAlignment="Left" Margin="10,132,0,0" Name="lblColor" VerticalAlignment="Top" Width="93" />
+        <Button Content="Select Color" Height="23" HorizontalAlignment="Left" Margin="108,132,0,0" Name="btnSelectColor" VerticalAlignment="Top" Width="112" Click="btnSelectColor_Click" />
+        <Label Content="Stroke" Height="28" HorizontalAlignment="Left" Margin="240,132,0,0" Name="lblStroke" VerticalAlignment="Top" Width="93" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="336,132,0,0" Name="txtStroke" VerticalAlignment="Top" Width="120" Background="#FFCCCCCC" PreviewKeyDown="txtStroke_PreviewKeyDown" />
     </Grid>
 </Window>
