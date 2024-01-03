@@ -13,7 +13,7 @@ namespace Section_2
             shapeType = shapeType.ToLower().Trim();
             if (shapeType.Equals("circle"))
             {
-                return new drawCircle();
+                return new DrawCircle();
 
             }
             else if (shapeType.Equals("rect"))
