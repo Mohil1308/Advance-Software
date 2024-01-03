@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Section_2
 {
-    internal class drawTriangle
+    public class drawTriangle
     {
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Section_2
 {
-    internal class drawSquare
+    public class drawSquare
     {
     }
 }
