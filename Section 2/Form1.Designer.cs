@@ -31,12 +31,12 @@
             button3 = new Button();
             button4 = new Button();
             button2 = new Button();
-            ControlPanel = new TabControl();
             groupBox1 = new GroupBox();
             display = new PictureBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
-            commandline = new TabControl();
+            ControlePanel = new RichTextBox();
+            commandline = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)display).BeginInit();
             groupBox2.SuspendLayout();
@@ -51,6 +51,7 @@
             button3.TabIndex = 0;
             button3.Text = "Run";
             button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -61,6 +62,8 @@
             button4.Text = "Clear";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button2_Click;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+
             // 
             // button2
             // 
@@ -70,18 +73,12 @@
             button2.TabIndex = 2;
             button2.Text = "Save";
             button2.UseVisualStyleBackColor = true;
-            // 
-            // ControlPanel
-            // 
-            ControlPanel.Location = new Point(31, 38);
-            ControlPanel.Name = "ControlPanel";
-            ControlPanel.SelectedIndex = 0;
-            ControlPanel.Size = new Size(657, 622);
-            ControlPanel.TabIndex = 3;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(ControlPanel);
+            groupBox1.Controls.Add(ControlePanel);
             groupBox1.Location = new Point(21, 97);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(711, 691);
@@ -118,13 +115,21 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Single Command";
             // 
+            // ControlePanel
+            // 
+            ControlePanel.Location = new Point(41, 38);
+            ControlePanel.Name = "ControlePanel";
+            ControlePanel.Size = new Size(647, 631);
+            ControlePanel.TabIndex = 0;
+            ControlePanel.Text = "";
+            // 
             // commandline
             // 
-            commandline.Location = new Point(21, 58);
+            commandline.Location = new Point(26, 56);
             commandline.Name = "commandline";
-            commandline.SelectedIndex = 0;
-            commandline.Size = new Size(900, 44);
-            commandline.TabIndex = 6;
+            commandline.Size = new Size(869, 39);
+            commandline.TabIndex = 0;
+            this.commandline.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Commandline_KeyDown);
             // 
             // Form1
             // 
@@ -145,6 +150,7 @@
             ((System.ComponentModel.ISupportInitialize)display).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -153,11 +159,11 @@
         private Button button3;
         private Button button4;
         private Button button2;
-        private TabControl ControlPanel;
         private GroupBox groupBox1;
         private PictureBox display;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private TabControl commandline;
+        private RichTextBox ControlePanel;
+        private TextBox commandline;
     }
 }

@@ -1,17 +1,26 @@
+using System;
 using System.Collections;
-
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Forms;
 namespace Section_2
 {
+
     public partial class Form1 : Form
     {
+
         private int x = 0, y = 0;
 
+        //for partition
         private string[] splitw;
         private string[] parm = new string[50];
         private int[] strSplit = new int[50];
         private int[] strError = new int[50];
 
-
+        //looping 
         private int loopmax;
         private int loopstart;
         private int loopfinish;
@@ -19,41 +28,28 @@ namespace Section_2
         private int errorno = 0;
 
 
+        //flag bits
         private bool lbit = false;
         private bool ifrslt = false;
         private bool strif = false;
         private bool condn = false;
 
-
+        //universal colour
         private Color pencolor = Color.Black;
         private Color brushcolor = Color.Cyan;
         private Random rndm = new Random();
 
-
+        //Shape Factory
         private Shape shape1;
         private shapeFactory factory = new shapeFactory();
+
 
         public Form1()
         {
             InitializeComponent();
             display.Image = new Bitmap(Size.Width, Size.Height);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         public void excecuteCommand(ArrayList Currentline, string[] lines, int linecount)
         {
@@ -203,7 +199,7 @@ namespace Section_2
                                 System.Drawing.Point pointc1 = new System.Drawing.Point(p3, p1);
 
                                 System.Drawing.Point[] pnt1 = { pointa1, pointb1, pointc1 };
-                                new DrawTriangle(pnt1).Draw(g, pen, brush);
+                                new drawTriangle(pnt1).Draw(g, pen, brush);
                             }
                             else
                             {
@@ -215,7 +211,7 @@ namespace Section_2
                                 System.Drawing.Point pointc1 = new System.Drawing.Point(p3, p1);
 
                                 System.Drawing.Point[] pnt1 = { pointa1, pointb1, pointc1 };
-                                new DrawTriangle(pnt1).Draw(g, pen, brush);
+                                new drawTriangle(pnt1).Draw(g, pen, brush);
                             }
                             break;
                         case "clear":
@@ -444,9 +440,503 @@ namespace Section_2
 
 
         }
+        private bool ifcheck(int left, string condition, int right) // used to check if sattment 
+        {
+            switch (condition)
+            {
+
+                case "=":
+                    if (left == right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+                    break;
+                case ">":
+                    if (left > right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+
+                    break;
+                case "<":
+                    if (left < right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+
+                    break;
+                case "!":
+                    if (left != right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+
+                    break;
+
+                default:
+                    MessageBox.Show("condition is not correct please check", "error");
+
+                    break;
+
+            }
+
+            return ifrslt;
+        }
+        private void VarCheck(string element1, string element2) //used to check if the var is set if not to set it or re set it 
+        {
+            int i = 0;
+            try
+            {
+                if (parm[0] == null && strSplit[0] == 0)  // arrays max is [49];
+                {
+                    parm[0] = element1;//name 
+                    int.TryParse(element2, out strSplit[0]);//value
+                }
+                else
+                {
+                    while (49 >= i)
+                    {
+                        if (parm[i].Equals(element1))//if names are the same
+                        {
+                            if (strSplit[i].Equals(element2))
+                            {
+                                MessageBox.Show("Variable already decleard", "Error");
+
+                                i = parm.Length;
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        }
+                        else if (i >= parm.Length)
+                        {
+                            i++;
+                        }
+                        else
+                        {
+                            parm[i++] = element1;
+                            int.TryParse(element2, out strSplit[i]);
+
+                        }
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+
+        }
+        private int varCall(string variable)
+        {
+            int i = 0;
+            int number = -1;
+            while (49 >= i)
+            {
+                if (parm[i] == variable)
+                {
+
+                    number = strSplit[i];
+                    i = 50;
+                }
+                else
+                {
+                    i++;
+                }
+
+            }
+            if (number == 0)
+            {
+                MessageBox.Show("not a variable", "error");
+            }
+            return number;
+
+        }
+
+        private void Commandline_KeyDown(object sender, KeyEventArgs e) //used to run the program
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                String txtdata = commandline.Text;
+                if (txtdata.Trim() == "")
+                {
+                    MessageBox.Show("Kindly enter any command first", "ERROR");
+
+                }
+                else
+                {
+                    String[] line;
+                    String[] lines;
+                    ArrayList Currentline = new ArrayList();
+                    int i = 0;
+                    if (txtdata.ToLower().Trim() == "run")
+                    {
+                        lines = ControlePanel.Lines.ToArray();
+                        while (lines.Length != i)
+                        {
+
+                            line = lines[i].Split(' ');
+                            Currentline.Add(line);
+                            i++;
+                        }
+
+                    }
+                    else
+                    {
+                        lines = commandline.Lines.ToArray();
+                        line = commandline.Text.Split(' ');
+                        Currentline.Add(line);
 
 
+                    }
+                    int length = lines.Length;
+
+                    Check(Currentline, lines, length);
+                    int L = 0;
+                    Array.Clear(parm, 0, parm.Length);//used to cleare the vars array befreo exicution
+                    Array.Clear(strSplit, 0, strSplit.Length);
+                    string errors = string.Join(", ", strError.Where(x => x != 0));
 
 
+                    if (condn == false)
+                    {
+
+                        MessageBox.Show("Errors on lines :" + errors + ".", "error");
+                    }
+                    else
+                    {
+
+                        excecuteCommand(Currentline, lines, length);
+                    }
+
+
+                }
+            }
+
+
+        }
+        public void Check(ArrayList currentline, string[] lines, int length)// checks the syntax of the user input
+        {
+            int count = 0;
+            int errors = 0;
+            errorno = 0;
+            condn = true;
+            int k = 0;
+            int linenumber = 0;
+
+
+            while (lines.Length >= count)
+            {
+
+                errors = errorno;
+                try
+                {
+                    splitw = (String[])currentline[count];
+
+
+                    switch (splitw[0].ToLower())
+                    {
+                        case "circle":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+
+                        case "rect":
+                            if (splitw.Length != 3)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+
+                        case "square":
+                            if (splitw.Length != 3)
+                            {
+                                errorno++;
+                            }
+                            break;
+
+                        case "drawto":
+                            if (splitw.Length != 3)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "pen":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+                            break;
+                        case "brushcolor":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+                            break;
+                        case "triangle":
+                            if (splitw.Length != 4)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "clear":
+
+
+                            break;
+                        case "movex":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "movey":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "moveto":
+                            if (splitw.Length != 3)
+                            {
+                                errorno++;
+                            }
+
+
+                            break;
+
+                        case "var":
+
+                            if (splitw.Length != 3)
+                            {
+                                errorno++;
+                            }
+                            else
+                            {
+                                VarCheck(splitw[1], splitw[2]);
+                            }
+
+                            break;
+
+                        case "loop":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+                            break;
+                        case "end":
+                            if (splitw.Length != 1)
+                            {
+                                errorno++;
+                            }
+                            break;
+                        case "factory":
+                            if (splitw.Length != 2)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "if":
+                            if (splitw.Length != 4)
+                            {
+                                errorno++;
+                            }
+
+                            break;
+                        case "endif":
+                            if (splitw.Length != 1)
+                            {
+                                errorno++;
+                            }
+                            break;
+                        default:
+                            if (splitw[0].Trim() == null)
+                            {
+
+                            }
+                            else
+                            {
+                                int i = 0;
+                                if (parm[0] != null)
+                                {
+                                    while (49 >= i)
+                                    {
+                                        if (parm[i] == splitw[0])
+                                        {
+                                            //  MessageBox.Show(element[0] + " called", "whoop");
+                                            if (!int.TryParse(splitw[1], out strSplit[i]))
+                                            {
+                                                MessageBox.Show(splitw[0] + "is all ready set to " + splitw[1], "whoop");
+                                            }
+                                            else
+                                            {
+                                                int.TryParse(splitw[1], out strSplit[i]);
+                                                MessageBox.Show(splitw[0] + " variable is set to " + splitw[1], "whoop");
+                                            }
+                                            i = 50;
+                                        }
+                                        else if (i != parm.Length)
+                                        {
+                                            i++;
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    errorno++;
+                                }
+                            }
+                            break;
+
+
+                    }
+                    if (errors != errorno)
+                    {
+                        linenumber = count;
+                        linenumber++;
+                        strError[k] = linenumber;
+                        k++;
+                        errors++;
+
+
+                    }
+                }
+                catch
+                {
+
+                }
+                count++;
+                if (errorno != 0)
+                {
+                    condn = false;
+                }
+                else
+                {
+                    condn = true;
+                }
+            }
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MemoryStream userInput = new MemoryStream(Encoding.UTF8.GetBytes(ControlePanel.Text));
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.DefaultExt = "txt";
+            save.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            DialogResult result = save.ShowDialog();
+            Stream fileStream;
+
+            if (result == DialogResult.OK)
+            {
+
+                fileStream = save.OpenFile();
+                userInput.Position = 0;
+                userInput.WriteTo(fileStream);
+                fileStream.Close();
+                userInput.Close();
+
+            }
+            save.Dispose();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String input = ControlePanel.Text;
+            if (input.Trim() == "")
+            {
+                MessageBox.Show("Enter a command", "ERROR");
+
+            }
+            else
+            {
+                String[] line;
+                String[] lines;
+                ArrayList Currentline = new ArrayList();
+                int i = 0;
+                lines = ControlePanel.Lines.ToArray();
+                while (lines.Length != i)
+                {
+
+                    line = lines[i].Split(' ');
+                    Currentline.Add(line);
+                    i++;
+                }
+                int length = lines.Length;
+
+                Check(Currentline, lines, length);
+                int L = 0;
+                Array.Clear(parm, 0, parm.Length);//used to cleare the vars array befreo exicution
+                Array.Clear(strSplit, 0, strSplit.Length);
+                string errors = string.Join(", ", strError.Where(x => x != 0));
+
+
+                if (condn == false)
+                {
+
+                    MessageBox.Show("Error Occur in Line no. :" + errors + ".", "error");
+                }
+                else
+                {
+
+                    excecuteCommand(Currentline, lines, length);
+                }
+
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            ControlePanel.Text = "";
+            commandline.Text = "";
+        }
+        private void ControlPanel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void commandline_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
