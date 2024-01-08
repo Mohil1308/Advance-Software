@@ -1,0 +1,10 @@
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.csproj.AssemblyReference.cache
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.Form1.resources
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.Properties.Resources.resources
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.csproj.GenerateResource.cache
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.csproj.CoreCompileInputs.cache
+C:\Users\sweet\source\repos\Advance Software\module_2_section\bin\Debug\module_2_section.exe.config
+C:\Users\sweet\source\repos\Advance Software\module_2_section\bin\Debug\module_2_section.exe
+C:\Users\sweet\source\repos\Advance Software\module_2_section\bin\Debug\module_2_section.pdb
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.exe
+C:\Users\sweet\source\repos\Advance Software\module_2_section\obj\Debug\module_2_section.pdb

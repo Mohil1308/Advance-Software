@@ -1,0 +1,2 @@
+C:\Users\sweet\source\repos\Advance Software\UnitTestProject3\obj\Debug\UnitTestProject3.csproj.AssemblyReference.cache
+C:\Users\sweet\source\repos\Advance Software\UnitTestProject3\obj\Debug\UnitTestProject3.csproj.CoreCompileInputs.cache

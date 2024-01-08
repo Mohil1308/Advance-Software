@@ -12,3 +12,4 @@ C:\Users\sweet\source\repos\Advance Software\Advance Software\obj\Debug\net6.0\r
 C:\Users\sweet\source\repos\Advance Software\Advance Software\obj\Debug\net6.0\Advance Software.pdb
 C:\Users\sweet\source\repos\Advance Software\Advance Software\obj\Debug\net6.0\Advance Software.genruntimeconfig.cache
 C:\Users\sweet\source\repos\Advance Software\Advance Software\obj\Debug\net6.0\ref\Advance Software.dll
+C:\Users\sweet\source\repos\Advance Software\Advance Software\obj\Debug\net6.0\Advance Software.sourcelink.json

@@ -498,52 +498,52 @@ namespace Section_2
 
             return ifrslt;
         }
-        private void VarCheck(string element1, string element2) //used to check if the var is set if not to set it or re set it 
+        private void VarCheck(string element1, string element2)
         {
-            int i = 0;
             try
             {
-                if (parm[0] == null && strSplit[0] == 0)  // arrays max is [49];
+                bool variableExists = false;
+                int index = 0;
+
+                // Check if the variable already exists
+                while (index < parm.Length && parm[index] != null)
                 {
-                    parm[0] = element1;//name 
-                    int.TryParse(element2, out strSplit[0]);//value
+                    if (parm[index].Equals(element1))
+                    {
+                        variableExists = true;
+                        break;
+                    }
+                    index++;
+                }
+
+                if (variableExists)
+                {
+                    MessageBox.Show("Variable already declared", "Error");
                 }
                 else
                 {
-                    while (49 >= i)
+                    // Find an empty slot or the first null element
+                    index = 0;
+                    while (index < parm.Length && parm[index] != null)
                     {
-                        if (parm[i].Equals(element1))//if names are the same
-                        {
-                            if (strSplit[i].Equals(element2))
-                            {
-                                MessageBox.Show("Variable already decleard", "Error");
+                        index++;
+                    }
 
-                                i = parm.Length;
-                            }
-                            else
-                            {
-                                i++;
-                            }
-                        }
-                        else if (i >= parm.Length)
-                        {
-                            i++;
-                        }
-                        else
-                        {
-                            parm[i++] = element1;
-                            int.TryParse(element2, out strSplit[i]);
-
-                        }
+                    if (index < parm.Length)
+                    {
+                        parm[index] = element1;
+                        int.TryParse(element2, out strSplit[index]);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Reached maximum variable limit", "Error");
                     }
                 }
-
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
             }
-
         }
         private int varCall(string variable)
         {
