@@ -88,7 +88,7 @@ namespace module_2_section
                     switch (splitw[0].ToLower())
                     {
                         case "circle":
-
+                            
                             int radius;
                             if (!int.TryParse(splitw[1], out radius))
                             {
@@ -101,6 +101,7 @@ namespace module_2_section
                                 int.TryParse(splitw[1], out radius);
                                 new DrawCircle(x, y, radius).Draw(g, pen, brush);
                             }
+                            
                             else
                             {
                                 MessageBox.Show("enter a radius or use a variable", "error");
@@ -383,8 +384,6 @@ namespace module_2_section
                             jump = 0;
                             strif = false;
                             break;
-
-
                         default:
                             if (splitw[0].Trim() == null)
                             {
@@ -426,6 +425,11 @@ namespace module_2_section
                             break;
 
                     }
+
+                    display.Invalidate();
+                    display.Update();
+
+
                     if (lbit == true)
                     {
                         loopcount++;
@@ -435,6 +439,12 @@ namespace module_2_section
                 }
                 catch
                 {
+                }
+                finally
+                {
+                    g.Dispose();
+                    pen.Dispose();
+                    brush.Dispose();
                 }
                 pen.Dispose();
                 brush.Dispose();
@@ -446,7 +456,38 @@ namespace module_2_section
 
 
         }
-       
+
+
+        private void myMethod()
+        {
+            // Assuming x, y, radius are available and represent the position and size of the circle
+            int x = 100; // replace with your actual x-coordinate
+            int y = 100; // replace with your actual y-coordinate
+            int radius = 50; // replace with your actual radius
+
+            // Method body
+            // Line 1
+            // Etc
+
+            // Draw a circle
+            Graphics g = Graphics.FromImage(display.Image); // Replace 'display' with your actual PictureBox or control
+            Pen pen = new Pen(pencolor, 2); // Replace 'pencolor' with your actual pen color
+            Brush brush = new SolidBrush(brushcolor); // Replace 'brushcolor' with your actual brush color
+
+            // Assuming you have a DrawCircle method that draws a circle
+            new DrawCircle(x, y, radius).Draw(g, pen, brush);
+
+            // Clean up resources
+            g.Dispose();
+            pen.Dispose();
+            brush.Dispose();
+
+            // For example, let's display a message
+            Console.WriteLine("myMethod without parameters has been executed, and a circle has been drawn.");
+        }
+
+
+
 
         private bool ifcheck(int left, string condition, int right) // used to check if sattment 
         {
@@ -708,6 +749,17 @@ namespace module_2_section
             tailTriangle.setTriangle(centerX, centerY, trianglePoints);
             tailTriangle.Draw(g, pen, brush);
         }
+
+
+        /// <summary>
+        /// Defines a method that draws a specific shape.
+        /// </summary>
+        /// <param name="g">The Graphics object used for drawing.</param>
+        /// <param name="pen">The Pen object used for outlining the shape.</param>
+        /// <param name="brush">The Brush object used for filling the shape.</param>
+        /// <param name="shapeType">The type of shape to draw.</param>
+        /// <param name="size">The size of the shape (e.g., radius, side length).</param>
+       
 
         private void Exampl1()
         {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Advance Software Module 2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebb5a732849b47d874f4417969b9aa094e49444e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Advance Software Module 2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Advance Software Module 2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
