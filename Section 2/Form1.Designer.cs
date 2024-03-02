@@ -32,10 +32,10 @@
             button4 = new Button();
             button2 = new Button();
             groupBox1 = new GroupBox();
+            ControlePanel = new RichTextBox();
             display = new PictureBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
-            ControlePanel = new RichTextBox();
             commandline = new TextBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)display).BeginInit();
@@ -45,61 +45,75 @@
             // 
             // button3
             // 
-            button3.Location = new Point(31, 938);
+            button3.Location = new Point(17, 440);
+            button3.Margin = new Padding(2, 1, 2, 1);
             button3.Name = "button3";
-            button3.Size = new Size(150, 46);
+            button3.Size = new Size(81, 22);
             button3.TabIndex = 0;
             button3.Text = "Run";
             button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Click += button3_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(296, 938);
+            button4.Location = new Point(159, 440);
+            button4.Margin = new Padding(2, 1, 2, 1);
             button4.Name = "button4";
-            button4.Size = new Size(150, 46);
+            button4.Size = new Size(81, 22);
             button4.TabIndex = 1;
             button4.Text = "Clear";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += button2_Click;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-
+            button4.Click += button4_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(559, 938);
+            button2.Location = new Point(301, 440);
+            button2.Margin = new Padding(2, 1, 2, 1);
             button2.Name = "button2";
-            button2.Size = new Size(150, 46);
+            button2.Size = new Size(81, 22);
             button2.TabIndex = 2;
             button2.Text = "Save";
             button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-
+            button2.Click += button2_Click;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(ControlePanel);
-            groupBox1.Location = new Point(21, 97);
+            groupBox1.Location = new Point(11, 45);
+            groupBox1.Margin = new Padding(2, 1, 2, 1);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(711, 691);
+            groupBox1.Padding = new Padding(2, 1, 2, 1);
+            groupBox1.Size = new Size(383, 324);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Multi Command";
             // 
+            // ControlePanel
+            // 
+            ControlePanel.Location = new Point(22, 18);
+            ControlePanel.Margin = new Padding(2, 1, 2, 1);
+            ControlePanel.Name = "ControlePanel";
+            ControlePanel.Size = new Size(350, 298);
+            ControlePanel.TabIndex = 0;
+            ControlePanel.Text = "";
+            // 
             // display
             // 
-            display.Location = new Point(21, 42);
+            display.Location = new Point(11, 20);
+            display.Margin = new Padding(2, 1, 2, 1);
             display.Name = "display";
-            display.Size = new Size(900, 849);
+            display.Size = new Size(485, 398);
             display.TabIndex = 5;
             display.TabStop = false;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(display);
-            groupBox2.Location = new Point(754, 12);
+            groupBox2.Location = new Point(406, 6);
+            groupBox2.Margin = new Padding(2, 1, 2, 1);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(927, 907);
+            groupBox2.Padding = new Padding(2, 1, 2, 1);
+            groupBox2.Size = new Size(499, 425);
             groupBox2.TabIndex = 6;
             groupBox2.TabStop = false;
             groupBox2.Text = "Drawing Area";
@@ -108,41 +122,37 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(commandline);
-            groupBox3.Location = new Point(754, 938);
+            groupBox3.Location = new Point(406, 440);
+            groupBox3.Margin = new Padding(2, 1, 2, 1);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(927, 124);
+            groupBox3.Padding = new Padding(2, 1, 2, 1);
+            groupBox3.Size = new Size(499, 58);
             groupBox3.TabIndex = 7;
             groupBox3.TabStop = false;
             groupBox3.Text = "Single Command";
             // 
-            // ControlePanel
-            // 
-            ControlePanel.Location = new Point(41, 38);
-            ControlePanel.Name = "ControlePanel";
-            ControlePanel.Size = new Size(647, 631);
-            ControlePanel.TabIndex = 0;
-            ControlePanel.Text = "";
-            // 
             // commandline
             // 
-            commandline.Location = new Point(26, 56);
+            commandline.Location = new Point(14, 26);
+            commandline.Margin = new Padding(2, 1, 2, 1);
             commandline.Name = "commandline";
-            commandline.Size = new Size(869, 39);
+            commandline.Size = new Size(470, 23);
             commandline.TabIndex = 0;
-            this.commandline.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Commandline_KeyDown);
+            commandline.KeyDown += Commandline_KeyDown;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
-            ClientSize = new Size(1693, 1090);
+            ClientSize = new Size(918, 513);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button2);
             Controls.Add(button4);
             Controls.Add(button3);
+            Margin = new Padding(2, 1, 2, 1);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;

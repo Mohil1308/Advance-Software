@@ -1,0 +1,9 @@
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\bin\Debug\Reassigmentpart2.exe.config
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\bin\Debug\Reassigmentpart2.exe
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\bin\Debug\Reassigmentpart2.pdb
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.csproj.AssemblyReference.cache
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.Properties.Resources.resources
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.csproj.GenerateResource.cache
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.csproj.CoreCompileInputs.cache
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.exe
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.pdb
