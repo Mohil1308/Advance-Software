@@ -102,6 +102,7 @@ namespace ASE__ASSINGMENT
                                 j = j + 2;
                             }
                         }
+                        
                         else if (oneCommand[j].ToString().Trim().Equals("designcircle"))
                         {
                             if (oneCommand.Count() != 2)
@@ -182,6 +183,27 @@ namespace ASE__ASSINGMENT
                                     runFlg = false;
                                 }
                                 j = j + 1;
+                            }
+                        }
+                        else if (oneCommand[j].ToString().Trim().Equals("var"))
+                        {
+                            if (oneCommand.Count() != 3)
+                            {
+                                errMsg = errMsg + "Invalid number of parameters for variable definition at command no " + (i + 1).ToString() + "!\n";
+                                runFlg = false;
+                                break;
+                            }
+                            else
+                            {
+                                // Extract variable name and value from command parameters
+                                string varName = oneCommand[j + 1].Trim();
+                                string varValue = oneCommand[j + 2].Trim();
+
+                                // Call a method to handle variable definition
+                                object value = DefineVariable(varName, varValue);
+
+                                // Move the index to skip processing of variable definition parameters
+                                j = j + 2;
                             }
                         }
                         else if (oneCommand[j].ToString().Trim().Equals("designrect"))
@@ -279,6 +301,11 @@ namespace ASE__ASSINGMENT
             {
                 CurrPoint(true);
             }
+        }
+
+        private object DefineVariable(string varName, string varValue)
+        {
+            throw new NotImplementedException();
         }
 
         private Boolean checkNumber(string no, ref int val)
