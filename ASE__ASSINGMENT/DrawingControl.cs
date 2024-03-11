@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ASE__ASSINGMENT
 {
@@ -25,6 +27,10 @@ namespace ASE__ASSINGMENT
             // Split the input string into individual commands based on the semicolon.
             string[] arrCommand = strtxt.ToLower().Split(new string[] { ";" }, StringSplitOptions.None);
             string[] oneCommand;
+            string[] split;
+            int counter = 0;
+            int jump = 0;
+            int[] sSplit = new int[50];
 
             // Iterate through each command.
             for (int i = 0; i < arrCommand.Count(); i++)
@@ -156,6 +162,47 @@ namespace ASE__ASSINGMENT
                                     DrawingShapes.pColor = Color.Blue;
                                 }
                                 j = j + 1;
+                            }
+                        }
+                        else if (split[0] == "if")
+                        {
+                            int left;
+                            int right;
+                            string condition;
+                            if (split.Length > 4)
+                            {
+                                MessageBox.Show("need more input", "Error");
+                            }
+                            else
+                            {
+                                if (!int.TryParse(split[1], out left))
+                                {
+                                    left = variable(split[1]);
+                                }
+                                else
+                                {
+                                    int.TryParse(split  [1], out left);
+                                }
+
+                                if (!int.TryParse(split [3], out right))
+                                {
+                                    right = variable(split[3]);
+                                }
+                                else
+                                {
+                                    int.TryParse(split[3], out right);
+                                }
+                                condition = split[2];
+                                ifcheck(left, condition, right);
+                                if (ifrslt == true)
+                                {
+                                    jump = counter + 2;
+                                    break;
+                                }
+                                else
+                                {
+                                    counter++;
+                                }
                             }
                         }
 
@@ -302,11 +349,30 @@ namespace ASE__ASSINGMENT
                 CurrPoint(true);
             }
         }
+        private int variable(string variable)
+        {
+            int number = -1; // Default value if variable is not found
+            for (int i = 0; i < parm.Length; i++)
+            {
+                if (parm[i] == variable)
+                {
+                    number = sSplit[i];
+                    break; // Exit loop once variable is found
+                }
+            }
 
+            if (number == -1)
+            {
+                MessageBox.Show($"Variable '{variable}' not found.", "Error");
+            }
+
+            return number;
+        }
         private object DefineVariable(string varName, string varValue)
         {
             throw new NotImplementedException();
         }
+        private bool ifrslt = false;
 
         private Boolean checkNumber(string no, ref int val)
         {
