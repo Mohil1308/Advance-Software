@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{1EB75CB1-9298-4709-A19B-FA2A292C7821}|ASE__ASSINGMENT\\ASE__ASSINGMENT.csproj|solutionrelative:ase__assingment\\drawingcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|c:\\users\\sweet\\source\\repos\\advance software\\section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|C:\\Users\\sweet\\source\\repos\\Advance Software\\section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|solutionrelative:section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|c:\\users\\sweet\\source\\repos\\advance software\\section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|C:\\Users\\sweet\\source\\repos\\Advance Software\\section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7BBF3457-01F1-4DA9-A905-F497C891815E}|Section 2\\Section 2.csproj|solutionrelative:section 2\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -32,10 +32,9 @@
               "RelativeDocumentMoniker": "Section 2\\Form1.cs",
               "ToolTip": "C:\\Users\\sweet\\source\\repos\\Advance Software\\Section 2\\Form1.cs",
               "RelativeToolTip": "Section 2\\Form1.cs",
-              "ViewState": "AQIAALoBAAAAAAAAAIA6wOUCAAAoAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAYwGUAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T16:00:55.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-12T16:00:55.461Z"
             },
             {
               "$type": "Document",
@@ -46,8 +45,7 @@
               "ToolTip": "C:\\Users\\sweet\\source\\repos\\Advance Software\\Section 2\\Form1.cs [Design]",
               "RelativeToolTip": "Section 2\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-12T16:00:50.116Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-03-12T16:00:50.116Z"
             },
             {
               "$type": "Document",
@@ -57,7 +55,7 @@
               "RelativeDocumentMoniker": "ASE__ASSINGMENT\\DrawingControl.cs",
               "ToolTip": "C:\\Users\\sweet\\source\\repos\\Advance Software\\ASE__ASSINGMENT\\DrawingControl.cs",
               "RelativeToolTip": "ASE__ASSINGMENT\\DrawingControl.cs",
-              "ViewState": "AQIAAHsBAAAAAAAAAAAAAI0BAAApAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAEwJYAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-10T14:27:33.32Z",
               "EditorCaption": ""

@@ -37,7 +37,7 @@ namespace ASE__ASSINGMENT
                 if (arrCommand[i].Trim().ToString() != string.Empty)
                 {
                     oneCommand = arrCommand[i].Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    for (int j = 0; j < oneCommand.Count(); j++)
+                    int j = 0;
                     {
                         if (oneCommand[j].ToString().Trim().Equals("goto"))
                         {
@@ -111,27 +111,48 @@ namespace ASE__ASSINGMENT
                         {
                             if (oneCommand.Count() != 2)
                             {
-                                errMsg = errMsg + "invalid number of parameters for circle " + (i + 1).ToString() + "\n";
+                                errMsg = errMsg + "Invalid number of parameters for circle " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                string radiusParameter = oneCommand[j + 1].Trim();
+                                int radius;
+
+                                // Check if the radius parameter is a variable name
+                                if (variables.ContainsKey(radiusParameter))
                                 {
-                                    if (runFlg)
+                                    // If it's a variable, retrieve its value
+                                    if (!int.TryParse(variables[radiusParameter], out radius))
                                     {
-                                        DrawCircle(cmdX);
+                                        // If the variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable " + radiusParameter + "\n";
+                                        runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Non numeric parameter " + (i + 1).ToString() + "\n";
-                                    runFlg = false;
+                                    // If it's not a variable, try parsing it as an integer
+                                    if (!int.TryParse(radiusParameter, out radius))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid radius value: " + radiusParameter + "\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 1;
+
+                                // If no errors occurred, proceed to draw the circle
+                                if (runFlg)
+                                {
+                                    // Draw the circle using the provided or variable radius
+                                    DrawCircle(radius);
+                                }
                             }
                         }
+
 
                         else if (oneCommand[j].ToString().Trim().Equals("pen"))
                         {
@@ -233,25 +254,17 @@ namespace ASE__ASSINGMENT
                         }
                         else if (oneCommand[j].ToString().Trim().Equals("var"))
                         {
-                            if (oneCommand.Count() != 3)
+                            if (oneCommand.Length != 3)
                             {
-                                errMsg = errMsg + "Invalid number of parameters for variable definition at command no " + (i + 1).ToString() + "!\n";
+                                errMsg = errMsg + "Invalid number of arguments at command " + (i + 1).ToString() + "!\n";
                                 runFlg = false;
-                                break;
                             }
                             else
                             {
-                                // Extract variable name and value from command parameters
-                                string varName = oneCommand[j + 1].Trim();
-                                string varValue = oneCommand[j + 2].Trim();
-
-                                // Call a method to handle variable definition
-                                object value = DefineVariable(varName, varValue);
-
-                                // Move the index to skip processing of variable definition parameters
-                                j = j + 2;
+                                VariableCheck(oneCommand[1], oneCommand[2]);
                             }
                         }
+
                         else if (oneCommand[j].ToString().Trim().Equals("designrect"))
                         {
                             if (oneCommand.Count() != 3)
@@ -285,6 +298,7 @@ namespace ASE__ASSINGMENT
                                 j = j + 2;
                             }
                         }
+
                         else if (oneCommand[j].ToString().Trim().Equals("designtriangle"))
                         {
                             if (oneCommand.Count() != 4)
@@ -417,64 +431,36 @@ namespace ASE__ASSINGMENT
 
             return ifrslt; // Return the result
         }
+        static Dictionary<string, string> variables = new Dictionary<string, string>();
         private void VariableCheck(string element1, string element2)
         {
-            string[] parameter = new string[100];
             int[] Split = new int[50];
-
+            string[] parameter = new string[50];
             try
             {
                 bool variableExists = false;
                 int index = 0;
-                
 
-                switch (element1)
+                // Check if the variable already exists
+                if (variables.ContainsKey(element1))
                 {
-                    case "check1":
-                        while (index < parameter.Length && parameter[index] != null)
-                        {
-                            if (parameter[index].Equals(element2))
-                            {
-                                variableExists = true;
-                                break;
-                            }
-                            index++;
-                        }
-                        break;
-                    case "check2":
-                        index = 0;
-                        while (index < parameter.Length && parameter[index] != null)
-                        {
-                            index++;
-                        }
-
-                        if (index < parameter.Length)
-                        {
-                            parameter[index] = element1;
-                            int.TryParse(element2, out Split[index]);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Reached maximum variable limit", "Error");
-                        }
-                        break;
-                    default:
-                        MessageBox.Show("Invalid condition", "Error");
-                        break;
+                    variableExists = true;
                 }
 
                 if (variableExists)
                 {
                     MessageBox.Show("Variable already declared", "Error");
                 }
+                else
+                {
+                    variables[element1] = element2; 
+                }
             }
             catch (Exception ex)
             {
-                // Handle any exceptions here
-                MessageBox.Show("An error occurred: " + ex.Message, "Error");
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error");
             }
         }
-
 
     }
 }
