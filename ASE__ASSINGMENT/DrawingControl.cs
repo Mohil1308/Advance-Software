@@ -74,36 +74,48 @@ namespace ASE__ASSINGMENT
                         }
                         else if (oneCommand[j].ToString().Trim().Equals("drawline"))
                         {
-                            // Check if "drawline" command has the correct number of parameters.
                             if (oneCommand.Count() != 3)
                             {
-                                errMsg = errMsg + "Command no " + i.ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Invalid number of parameters for drawline " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                int x2, y2;
+                                string x2Parameter = oneCommand[j + 1].Trim();
+                                string y2Parameter = oneCommand[j + 2].Trim();
+
+                                // Check if the coordinates parameters are variable names
+                                if (variables.ContainsKey(x2Parameter) && variables.ContainsKey(y2Parameter))
                                 {
-                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
+                                    // If they are variables, retrieve their values
+                                    if (!int.TryParse(variables[x2Parameter], out x2) || !int.TryParse(variables[y2Parameter], out y2))
                                     {
-                                        if (runFlg)
-                                        {
-                                            DrawLine(cmdX, cmdY);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        errMsg = errMsg + " Invalid number at command no " + i.ToString() + "!\n";
+                                        // If any variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable(s) in drawline parameters\n";
                                         runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + i.ToString() + "!\n";
-                                    runFlg = false;
+                                    // If they are not variables, try parsing them as integers
+                                    if (!int.TryParse(x2Parameter, out x2) || !int.TryParse(y2Parameter, out y2))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid coordinates value(s) for drawline\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 2;
+
+                                // If no errors occurred, proceed to draw the line
+                                if (runFlg)
+                                {
+                                    // Draw the line using the provided or variable coordinates
+                                    DrawLine(x2, y2);
+                                }
                             }
                         }
 
@@ -467,7 +479,6 @@ namespace ASE__ASSINGMENT
             try
             {
                 bool variableExists = false;
-                int index = 0;
 
                 // Check if the variable already exists
                 if (variables.ContainsKey(element1))
