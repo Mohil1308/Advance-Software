@@ -13,6 +13,6 @@ C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\bin\Debug\Microsof
 C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTestProject1.csproj.AssemblyReference.cache
 C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTestProject1.csproj.CoreCompileInputs.cache
-C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTestProject1.csproj.CopyComplete
 C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+C:\Users\sweet\source\repos\Advance Software\UnitTestProject1\obj\Debug\UnitTest.40E657F8.Up2Date

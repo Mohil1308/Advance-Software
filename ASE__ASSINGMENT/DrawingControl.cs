@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ASE__ASSINGMENT
 {
@@ -23,7 +24,6 @@ namespace ASE__ASSINGMENT
             string errMsg = string.Empty;
             string strCommand = string.Empty;
             Boolean runFlg = true;
-            int cmdX = 0, cmdY = 0, cmdz = 0;
             // Split the input string into individual commands based on the semicolon.
             string[] arrCommand = strtxt.ToLower().Split(new string[] { ";" }, StringSplitOptions.None);
             string[] oneCommand;
@@ -211,43 +211,76 @@ namespace ASE__ASSINGMENT
                         }
                         else if (oneCommand[0] == "if")
                         {
-                            int jump = 0;
                             int left;
                             int right;
                             string condition;
-                            if (oneCommand.Length > 4)
+
+                            // Check if the command has the correct number of parameters
+                            if (oneCommand.Length != 4)
                             {
-                                MessageBox.Show("need more input", "Error");
+                                errMsg = errMsg + "Invalid number of parameters for if condition at command no " + (i + 1).ToString() + "!\n";
+                                runFlg = false;
                             }
                             else
                             {
+                                // Parse the left operand of the condition
                                 if (!int.TryParse(oneCommand[1], out left))
                                 {
-                                    left = variable(oneCommand[1]);
-                                }
-                                else
-                                {
-                                    int.TryParse(oneCommand[1], out left);
+                                    // Try to parse as variable if not an integer
+                                    string leftVariableValue;
+                                    if (variables.TryGetValue(oneCommand[1], out leftVariableValue))
+                                    {
+                                        if (!int.TryParse(leftVariableValue, out left))
+                                        {
+                                            errMsg = errMsg + "Variable '" + oneCommand[1] + "' does not contain a valid integer value\n";
+                                            runFlg = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errMsg = errMsg + "Variable '" + oneCommand[1] + "' not found\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
 
+                                // Parse the right operand of the condition
                                 if (!int.TryParse(oneCommand[3], out right))
                                 {
-                                    right = variable(oneCommand[3]);
+                                    // Try to parse as variable if not an integer
+                                    string rightVariableValue;
+                                    if (variables.TryGetValue(oneCommand[3], out rightVariableValue))
+                                    {
+                                        if (!int.TryParse(rightVariableValue, out right))
+                                        {
+                                            errMsg = errMsg + "Variable '" + oneCommand[3] + "' does not contain a valid integer value\n";
+                                            runFlg = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errMsg = errMsg + "Variable '" + oneCommand[3] + "' not found\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                else
-                                {
-                                    int.TryParse(oneCommand[3], out right);
-                                }
+
+                                // Get the condition operator
                                 condition = oneCommand[2];
-                                Ifcheck(left, condition, right);
-                                if (ifrslt == true)
+
+                                // Evaluate the condition
+                                bool result = Ifcheck(left, condition, right);
+
+                                // Display message indicating whether the condition is true or false
+                                PrintMessage("Condition: " + oneCommand[1] + " " + condition + " " + oneCommand[3] + " is " + result.ToString());
+
+                                // If condition is true, continue to the next command
+                                // If condition is false, skip the next command by incrementing the counter
+                                if (!result)
                                 {
-                                    jump = counter + 2;
-                                    break;
-                                }
-                                else
-                                {
-                                    counter++;
+                                    i++; // Increment the counter to skip the next command
                                 }
                             }
                         }
@@ -430,39 +463,7 @@ namespace ASE__ASSINGMENT
                 CurrPoint(true);
             }
         }
-        private int variable(string variable)
-        {
-            int[] Split = new int[100];
-            string[] parameter = new string[100];
-            int i = 0;
-            int number = -1;
-            while (99 >= i)
-            {
-                if (parameter[i] == variable)
-                {
-
-                    number = Split[i];
-                    i = 50;
-                }
-                else
-                {
-                    i++;
-                }
-
-            }
-            if (number == 0)
-            {
-                MessageBox.Show("not a variable", "error");
-            }
-            return number;
-
-        }
-        private object DefineVariable(string varName, string varValue)
-        {
-            throw new NotImplementedException();
-        }
-        private bool ifrslt = false;
-
+       
         private Boolean checkNumber(string no, ref int val)
         {
             Boolean isNumber = false;
@@ -474,31 +475,56 @@ namespace ASE__ASSINGMENT
         {
             bool ifrslt = false; // Initialize the result variable
 
-            // Use if-else statements to perform the comparison based on the condition
-            if (condition == "=")
+            switch (condition)
             {
-                ifrslt = (left == right);
-            }
-            else if (condition == ">")
-            {
-                ifrslt = (left > right);
-            }
-            else if (condition == "<")
-            {
-                ifrslt = (left < right);
-            }
-            else if (condition == "!")
-            {
-                ifrslt = (left != right);
-            }
-            else
-            {
-                // Display error message for invalid condition
-                MessageBox.Show("Condition is not correct, please check", "Error");
+                case "=":
+                    if (left == right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+                    break;
+                case ">":
+                    if (left > right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+                    break;
+                case "<":
+                    if (left < right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+                    break;
+                case "!":
+                    if (left != right)
+                    {
+                        ifrslt = true;
+                    }
+                    else
+                    {
+                        ifrslt = false;
+                    }
+                    break;
+                default:
+                    MessageBox.Show("Invalid condition: " + condition + ". Please check the condition syntax.", "Error");
+                    break;
             }
 
-            return ifrslt; // Return the result
+            return ifrslt;
         }
+
         static Dictionary<string, string> variables = new Dictionary<string, string>();
         private void VariableCheck(string element1, string element2)
         {

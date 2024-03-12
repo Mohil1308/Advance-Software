@@ -13,6 +13,6 @@ C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\bin\Debug\module_2_
 C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\bin\Debug\module_2_section.exe.config
 C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
-C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\obj\Debug\UnitTestModule2.csproj.CopyComplete
 C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\obj\Debug\UnitTestModule2.dll
 C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\obj\Debug\UnitTestModule2.pdb
+C:\Users\sweet\source\repos\Advance Software\UnitTestModule2\obj\Debug\UnitTest.FAD5762A.Up2Date

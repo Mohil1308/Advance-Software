@@ -7,3 +7,4 @@ C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigm
 C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.csproj.CoreCompileInputs.cache
 C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.exe
 C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.pdb
+C:\Users\sweet\source\repos\Advance Software\Reassigmentpart2\obj\Debug\Reassigmentpart2.Form1.resources
