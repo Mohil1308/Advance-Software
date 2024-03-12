@@ -27,10 +27,8 @@ namespace ASE__ASSINGMENT
             // Split the input string into individual commands based on the semicolon.
             string[] arrCommand = strtxt.ToLower().Split(new string[] { ";" }, StringSplitOptions.None);
             string[] oneCommand;
-            string[] split;
+
             int counter = 0;
-            int jump = 0;
-            int[] sSplit = new int[50];
 
             // Iterate through each command.
             for (int i = 0; i < arrCommand.Count(); i++)
@@ -108,7 +106,7 @@ namespace ASE__ASSINGMENT
                                 j = j + 2;
                             }
                         }
-                        
+
                         else if (oneCommand[j].ToString().Trim().Equals("designcircle"))
                         {
                             if (oneCommand.Count() != 2)
@@ -164,36 +162,37 @@ namespace ASE__ASSINGMENT
                                 j = j + 1;
                             }
                         }
-                        else if (split[0] == "if")
+                        else if (oneCommand[0] == "if")
                         {
+                            int jump = 0;
                             int left;
                             int right;
                             string condition;
-                            if (split.Length > 4)
+                            if (oneCommand.Length > 4)
                             {
                                 MessageBox.Show("need more input", "Error");
                             }
                             else
                             {
-                                if (!int.TryParse(split[1], out left))
+                                if (!int.TryParse(oneCommand[1], out left))
                                 {
-                                    left = variable(split[1]);
+                                    left = variable(oneCommand[1]);
                                 }
                                 else
                                 {
-                                    int.TryParse(split  [1], out left);
+                                    int.TryParse(oneCommand[1], out left);
                                 }
 
-                                if (!int.TryParse(split [3], out right))
+                                if (!int.TryParse(oneCommand[3], out right))
                                 {
-                                    right = variable(split[3]);
+                                    right = variable(oneCommand[3]);
                                 }
                                 else
                                 {
-                                    int.TryParse(split[3], out right);
+                                    int.TryParse(oneCommand[3], out right);
                                 }
-                                condition = split[2];
-                                ifcheck(left, condition, right);
+                                condition = oneCommand[2];
+                                Ifcheck(left, condition, right);
                                 if (ifrslt == true)
                                 {
                                     jump = counter + 2;
@@ -351,22 +350,30 @@ namespace ASE__ASSINGMENT
         }
         private int variable(string variable)
         {
-            int number = -1; // Default value if variable is not found
-            for (int i = 0; i < parm.Length; i++)
+            int[] Split = new int[100];
+            string[] parameter = new string[100];
+            int i = 0;
+            int number = -1;
+            while (99 >= i)
             {
-                if (parm[i] == variable)
+                if (parameter[i] == variable)
                 {
-                    number = sSplit[i];
-                    break; // Exit loop once variable is found
+
+                    number = Split[i];
+                    i = 50;
                 }
-            }
+                else
+                {
+                    i++;
+                }
 
-            if (number == -1)
+            }
+            if (number == 0)
             {
-                MessageBox.Show($"Variable '{variable}' not found.", "Error");
+                MessageBox.Show("not a variable", "error");
             }
-
             return number;
+
         }
         private object DefineVariable(string varName, string varValue)
         {
@@ -381,5 +388,93 @@ namespace ASE__ASSINGMENT
                 isNumber = true;
             return isNumber;
         }
+        private bool Ifcheck(int left, string condition, int right)
+        {
+            bool ifrslt = false; // Initialize the result variable
+
+            // Use if-else statements to perform the comparison based on the condition
+            if (condition == "=")
+            {
+                ifrslt = (left == right);
+            }
+            else if (condition == ">")
+            {
+                ifrslt = (left > right);
+            }
+            else if (condition == "<")
+            {
+                ifrslt = (left < right);
+            }
+            else if (condition == "!")
+            {
+                ifrslt = (left != right);
+            }
+            else
+            {
+                // Display error message for invalid condition
+                MessageBox.Show("Condition is not correct, please check", "Error");
+            }
+
+            return ifrslt; // Return the result
+        }
+        private void VariableCheck(string element1, string element2)
+        {
+            string[] parameter = new string[100];
+            int[] Split = new int[50];
+
+            try
+            {
+                bool variableExists = false;
+                int index = 0;
+                
+
+                switch (element1)
+                {
+                    case "check1":
+                        while (index < parameter.Length && parameter[index] != null)
+                        {
+                            if (parameter[index].Equals(element2))
+                            {
+                                variableExists = true;
+                                break;
+                            }
+                            index++;
+                        }
+                        break;
+                    case "check2":
+                        index = 0;
+                        while (index < parameter.Length && parameter[index] != null)
+                        {
+                            index++;
+                        }
+
+                        if (index < parameter.Length)
+                        {
+                            parameter[index] = element1;
+                            int.TryParse(element2, out Split[index]);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Reached maximum variable limit", "Error");
+                        }
+                        break;
+                    default:
+                        MessageBox.Show("Invalid condition", "Error");
+                        break;
+                }
+
+                if (variableExists)
+                {
+                    MessageBox.Show("Variable already declared", "Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions here
+                MessageBox.Show("An error occurred: " + ex.Message, "Error");
+            }
+        }
+
+
     }
 }
