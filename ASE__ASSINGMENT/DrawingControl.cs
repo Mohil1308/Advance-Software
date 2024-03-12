@@ -231,27 +231,48 @@ namespace ASE__ASSINGMENT
                         {
                             if (oneCommand.Count() != 2)
                             {
-                                errMsg = errMsg + "Command no " + (i + 1).ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Invalid number of parameters for square " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                int side;
+                                string sideParameter = oneCommand[j + 1].Trim();
+
+                                // Check if the side parameter is a variable name
+                                if (variables.ContainsKey(sideParameter))
                                 {
-                                    if (runFlg)
+                                    // If it's a variable, retrieve its value
+                                    if (!int.TryParse(variables[sideParameter], out side))
                                     {
-                                        DrawSquare(cmdX);
+                                        // If the variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable " + sideParameter + "\n";
+                                        runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
-                                    runFlg = false;
+                                    // If it's not a variable, try parsing it as an integer
+                                    if (!int.TryParse(sideParameter, out side))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid side length value: " + sideParameter + "\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 1;
+
+                                // If no errors occurred, proceed to draw the square
+                                if (runFlg)
+                                {
+                                    // Draw the square using the provided or variable side length
+                                    DrawSquare(side);
+                                }
                             }
                         }
+
                         else if (oneCommand[j].ToString().Trim().Equals("var"))
                         {
                             if (oneCommand.Length != 3)
