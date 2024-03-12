@@ -43,35 +43,49 @@ namespace ASE__ASSINGMENT
                         {
                             if (oneCommand.Count() != 3)
                             {
-                                errMsg = errMsg + "Command no. " + (i + 1).ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Invalid number of parameters for goto " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                int x, y;
+                                string xParameter = oneCommand[j + 1].Trim();
+                                string yParameter = oneCommand[j + 2].Trim();
+
+                                // Check if the coordinates parameters are variable names
+                                if (variables.ContainsKey(xParameter) && variables.ContainsKey(yParameter))
                                 {
-                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
+                                    // If they are variables, retrieve their values
+                                    if (!int.TryParse(variables[xParameter], out x) || !int.TryParse(variables[yParameter], out y))
                                     {
-                                        if (runFlg)
-                                        {
-                                            MovePoint(cmdX, cmdY);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
+                                        // If any variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable(s) in goto parameters\n";
                                         runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
-                                    runFlg = false;
+                                    // If they are not variables, try parsing them as integers
+                                    if (!int.TryParse(xParameter, out x) || !int.TryParse(yParameter, out y))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid coordinates value(s) for goto\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 2;
+
+                                // If no errors occurred, proceed to move the cursor
+                                if (runFlg)
+                                {
+                                    // Move the cursor to the specified coordinates
+                                    MovePoint(x, y);
+                                }
                             }
                         }
+
                         else if (oneCommand[j].ToString().Trim().Equals("drawline"))
                         {
                             if (oneCommand.Count() != 3)
@@ -302,35 +316,49 @@ namespace ASE__ASSINGMENT
                         {
                             if (oneCommand.Count() != 3)
                             {
-                                errMsg = errMsg + "Invalid no of argument at command " + (i + 1).ToString() + "!\n";
+                                errMsg = errMsg + "Invalid number of parameters for designrect " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                int width, height;
+                                string widthParameter = oneCommand[j + 1].Trim();
+                                string heightParameter = oneCommand[j + 2].Trim();
+
+                                // Check if the width and height parameters are variable names
+                                if (variables.ContainsKey(widthParameter) && variables.ContainsKey(heightParameter))
                                 {
-                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
+                                    // If they are variables, retrieve their values
+                                    if (!int.TryParse(variables[widthParameter], out width) || !int.TryParse(variables[heightParameter], out height))
                                     {
-                                        if (runFlg)
-                                        {
-                                            DrawRect(cmdX, cmdY);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
+                                        // If any variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable(s) in designrect parameters\n";
                                         runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
-                                    runFlg = false;
+                                    // If they are not variables, try parsing them as integers
+                                    if (!int.TryParse(widthParameter, out width) || !int.TryParse(heightParameter, out height))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid width or height value(s) for designrect\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 2;
+
+                                // If no errors occurred, proceed to draw the rectangle
+                                if (runFlg)
+                                {
+                                    // Draw the rectangle using the provided or variable width and height
+                                    DrawRect(width, height);
+                                }
                             }
                         }
+
 
                         else if (oneCommand[j].ToString().Trim().Equals("designtriangle"))
                         {
