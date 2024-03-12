@@ -324,43 +324,50 @@ namespace ASE__ASSINGMENT
                         {
                             if (oneCommand.Count() != 4)
                             {
-                                errMsg = errMsg + "Command no " + (i + 1).ToString() + " is invalid!\n";
+                                errMsg = errMsg + "Invalid number of parameters for triangle " + (i + 1).ToString() + "\n";
                                 runFlg = false;
                                 break;
                             }
                             else
                             {
-                                if (checkNumber(oneCommand[j + 1].Trim(), ref cmdX))
+                                int side1, side2, side3;
+                                string side1Parameter = oneCommand[j + 1].Trim();
+                                string side2Parameter = oneCommand[j + 2].Trim();
+                                string side3Parameter = oneCommand[j + 3].Trim();
+
+                                // Check if the side parameters are variable names
+                                if (variables.ContainsKey(side1Parameter) && variables.ContainsKey(side2Parameter) && variables.ContainsKey(side3Parameter))
                                 {
-                                    if (checkNumber(oneCommand[j + 2].Trim(), ref cmdY))
+                                    // If they are variables, retrieve their values
+                                    if (!int.TryParse(variables[side1Parameter], out side1) || !int.TryParse(variables[side2Parameter], out side2) || !int.TryParse(variables[side3Parameter], out side3))
                                     {
-                                        if (checkNumber(oneCommand[j + 3].Trim(), ref cmdz))
-                                        {
-                                            if (runFlg)
-                                            {
-                                                DrawTriangle(cmdX, cmdY, cmdz);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
-                                            runFlg = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
+                                        // If any variable value is not a valid integer, display an error message
+                                        errMsg = errMsg + "Invalid value for variable(s) in triangle parameters\n";
                                         runFlg = false;
+                                        break;
                                     }
                                 }
                                 else
                                 {
-                                    errMsg = errMsg + " Invalid number at command no " + (i + 1).ToString() + "!\n";
-                                    runFlg = false;
+                                    // If they are not variables, try parsing them as integers
+                                    if (!int.TryParse(side1Parameter, out side1) || !int.TryParse(side2Parameter, out side2) || !int.TryParse(side3Parameter, out side3))
+                                    {
+                                        // If parsing fails, display an error message
+                                        errMsg = errMsg + "Invalid triangle side length value(s)\n";
+                                        runFlg = false;
+                                        break;
+                                    }
                                 }
-                                j = j + 3;
+
+                                // If no errors occurred, proceed to draw the triangle
+                                if (runFlg)
+                                {
+                                    // Draw the triangle using the provided or variable side lengths
+                                    DrawTriangle(side1, side2, side3);
+                                }
                             }
                         }
+
                         else
                         {
                             errMsg = errMsg + "Unknown Command at line " + (i + 1).ToString();
