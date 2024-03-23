@@ -30,15 +30,26 @@ namespace ASE__ASSINGMENT
 
             int counter = 0;
 
+            bool isLoopConditionValid = false;
+            Boolean isLoopStatement = false;
+            int loopStartingIndex = 0;
             // Iterate through each command.
             for (int i = 0; i < arrCommand.Count(); i++)
             {
+               
+
                 // Check if the command is not empty.
                 if (arrCommand[i].Trim().ToString() != string.Empty)
                 {
                     oneCommand = arrCommand[i].Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     int j = 0;
                     {
+
+                        if (isLoopStatement && !isLoopConditionValid && !oneCommand[j].ToString().Trim().Equals("end"))
+                        {
+                            continue;
+                        }
+
                         if (oneCommand[j].ToString().Trim().Equals("goto"))
                         {
                             if (oneCommand.Count() != 3)
@@ -132,6 +143,93 @@ namespace ASE__ASSINGMENT
                                 }
                             }
                         }
+                        else if (oneCommand[j].ToString().Trim().Equals("while") || oneCommand[j].ToString().Trim().Equals("end"))
+                        {
+                            if (oneCommand[j].ToString().Trim().Equals("end"))
+                            {
+                                if (isLoopConditionValid)
+                                {
+                                    i = loopStartingIndex;
+                                }
+                                else
+                                {
+                                    isLoopStatement = false;
+                                }
+                                continue;
+                            }
+                            isLoopStatement = true;
+                            if (oneCommand.Count() != 4)
+                            {
+                                errMsg = errMsg + "Invalid number of parameters for while loop at command " + (i + 1).ToString() + "\n";
+                                runFlg = false;
+                                break;
+                            }
+                            else
+                            {
+                                int left, right;
+                                string condition;
+
+                                // Parse the left operand of the condition
+                                if (!int.TryParse(oneCommand[1], out left))
+                                {
+                                    // Try to parse as variable if not an integer
+                                    string leftVariableValue;
+                                    if (variables.TryGetValue(oneCommand[1], out leftVariableValue))
+                                    {
+                                        if (!int.TryParse(leftVariableValue, out left))
+                                        {
+                                            errMsg = errMsg + "Variable '" + oneCommand[1] + "' does not contain a valid integer value\n";
+                                            runFlg = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errMsg = errMsg + "Variable '" + oneCommand[1] + "' not found\n";
+                                        runFlg = false;
+                                        break;
+                                    }
+                                }
+
+                                // Parse the right operand of the condition
+                                if (!int.TryParse(oneCommand[3], out right))
+                                {
+                                    // Try to parse as variable if not an integer
+                                    string rightVariableValue;
+                                    if (variables.TryGetValue(oneCommand[3], out rightVariableValue))
+                                    {
+                                        if (!int.TryParse(rightVariableValue, out right))
+                                        {
+                                            errMsg = errMsg + "Variable '" + oneCommand[3] + "' does not contain a valid integer value\n";
+                                            runFlg = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        errMsg = errMsg + "Variable '" + oneCommand[3] + "' not found\n";
+                                        runFlg = false;
+                                        break;
+                                    }
+                                }
+
+                                // Get the condition operator
+                                condition = oneCommand[2];
+
+                                // Evaluate the condition
+                                isLoopConditionValid = Ifcheck(left, condition, right);
+
+                                // If the condition is true, execute the loop
+                                if (isLoopConditionValid)
+                                {
+                                    //found out the loop starting point and reset to that one 
+                                    loopStartingIndex = i-1; //- 1 because above for loop increase the j value after finishing the one block
+
+                                }
+                               
+                            }
+                        }
+
 
                         else if (oneCommand[j].ToString().Trim().Equals("designcircle"))
                         {
@@ -274,7 +372,7 @@ namespace ASE__ASSINGMENT
                                 bool result = Ifcheck(left, condition, right);
 
                                 // Display message indicating whether the condition is true or false
-                                PrintMessage("Condition: " + oneCommand[1] + " " + condition + " " + oneCommand[3] + " is " + result.ToString());
+                               
 
                                 // If condition is true, continue to the next command
                                 // If condition is false, skip the next command by incrementing the counter
@@ -528,8 +626,6 @@ namespace ASE__ASSINGMENT
         static Dictionary<string, string> variables = new Dictionary<string, string>();
         private void VariableCheck(string element1, string element2)
         {
-            int[] Split = new int[50];
-            string[] parameter = new string[50];
             try
             {
                 bool variableExists = false;
@@ -540,20 +636,56 @@ namespace ASE__ASSINGMENT
                     variableExists = true;
                 }
 
-                if (variableExists)
-                {
-                    MessageBox.Show("Variable already declared", "Error");
-                }
-                else
-                {
-                    variables[element1] = element2; 
-                }
+
+                    // Check if element2 contains an arithmetic operation
+                    if (element2.Contains("+") || element2.Contains("-"))
+                    {
+                        string[] parts = element2.Split(new char[] { '+', '-' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length == 2)
+                        {
+                            if (variables.TryGetValue(parts[0].Trim(), out string value))
+                            {
+                                int newValue;
+                                if (int.TryParse(parts[1].Trim(), out int operand))
+                                {
+                                    if (element2.Contains("+"))
+                                    {
+                                        newValue = int.Parse(value) + operand;
+                                    }
+                                    else
+                                    {
+                                        newValue = int.Parse(value) - operand;
+                                    }
+                                    variables[element1] = newValue.ToString();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Invalid operand for arithmetic operation", "Error");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Variable '{parts[0]}' does not exist", "Error");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid arithmetic operation", "Error");
+                        }
+                    }
+                    else
+                    {
+                        // If element2 is a simple value, assign it to the variable
+                        variables[element1] = element2;
+                    }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error");
             }
         }
+
 
     }
 }
